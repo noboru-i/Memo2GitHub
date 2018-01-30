@@ -14,10 +14,14 @@
   },
   "devDependencies": {
     "babel-jest": "22.1.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-react-native-web": "^0.3.3",
     "babel-preset-react-native": "4.0.0",
     "jest": "22.1.4",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.2.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "jest": {
     "preset": "react-native"
