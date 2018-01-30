@@ -1,0 +1,3 @@
+rootProject.name = 'Memo2GitHub'
+
+include ':app'
