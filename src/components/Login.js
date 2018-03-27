@@ -19,19 +19,6 @@ export default class App extends Component<{}> {
     };
   }
 
-  componentDidMount() {
-    const octokit = new Octokit();
-    octokit.repos
-      .getForOrg({
-        org: 'octokit',
-        type: 'public'
-      })
-      .then(({ data }) => {
-        console.log(data);
-        this.setState({ data: data });
-      });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -43,23 +30,32 @@ export default class App extends Component<{}> {
           placeholder="token"
           onChangeText={text => this.setState({ token: text })}
         />
-        <Button onPress={this.onPressCheck.bind(this)} title="Check" />
+        <Button
+          onPress={this.onPressCheck.bind(this)}
+          title="Check"
+          disabled={!this.state.user_id || !this.state.token}
+        />
       </View>
     );
   }
 
   onPressCheck() {
-    console.log('press!!!!' + this.state.token);
     const octokit = new Octokit();
     octokit.authenticate({
       type: 'basic',
       username: this.state.user_id,
       password: this.state.token
     });
-    octokit.users.get({}).then(({ data }) => {
-      console.log(data.login);
-      alert('Hello ' + data.login + ' !!');
-    });
+    octokit.users
+      .get({})
+      .then(({ data }) => {
+        alert('Hello ' + data.login + ' !!');
+      })
+      .catch(error => {
+        if (error.code === 401) {
+          alert('Failed to Authenticate. Please recheck user id and token.');
+        }
+      });
   }
 }
 
