@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
   TextInput,
-  Button
+  Button,
+  AsyncStorage
 } from 'react-native';
-
 import Octokit from '@octokit/rest';
 
 export default class App extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: '',
       token: ''
     };
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('auth.token').then(data => {
+      if (data) {
+        this.setState({ token: data });
+      }
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <TextInput
-          placeholder="user id"
-          onChangeText={text => this.setState({ user_id: text })}
-        />
-        <TextInput
           placeholder="token"
           onChangeText={text => this.setState({ token: text })}
+          value={this.state.token}
         />
         <Button
           onPress={this.onPressCheck.bind(this)}
           title="Check"
-          disabled={!this.state.user_id || !this.state.token}
+          disabled={!this.state.token}
         />
       </View>
     );
@@ -42,14 +45,14 @@ export default class App extends Component<{}> {
   onPressCheck() {
     const octokit = new Octokit();
     octokit.authenticate({
-      type: 'basic',
-      username: this.state.user_id,
-      password: this.state.token
+      type: 'token',
+      token: this.state.token
     });
     octokit.users
       .get({})
       .then(({ data }) => {
         alert('Hello ' + data.login + ' !!');
+        AsyncStorage.setItem('auth.token', this.state.token);
       })
       .catch(error => {
         if (error.code === 401) {
@@ -61,7 +64,6 @@ export default class App extends Component<{}> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
