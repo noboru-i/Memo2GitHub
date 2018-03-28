@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:android": "react-native run-android",
     "start:ios": "react-native run-ios",
-    "start:web": "webpack-dev-server --content-base web/public/ -d --config ./web/webpack.config.js --inline --hot --colors",
+    "start:web":
+      "webpack-dev-server --content-base web/public/ -d --config ./web/webpack.config.js --inline --hot --colors",
     "start:electron:server": "webpack-serve ./electron/webpack.config.js",
     "start:electron:client": "electron ./electron/app/main.js",
     "test": "jest"
@@ -26,7 +27,7 @@
     "babel-preset-react-native": "4.0.0",
     "electron": "^1.8.4",
     "jest": "^22.4.3",
-    "react-test-renderer": "16.2.0",
+    "react-test-renderer": "^16.3.0-alpha.1",
     "url-loader": "^1.0.1",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.13",

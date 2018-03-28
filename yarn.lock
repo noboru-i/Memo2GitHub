@@ -6686,6 +6686,10 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-is@^16.3.0-rc.0:
+  version "16.3.0-rc.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0-rc.0.tgz#f06b6c036ce594cb0a7117148a74850d16d812a9"
+
 react-native-electron@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/react-native-electron/-/react-native-electron-0.4.2.tgz#654b49b21bb08fb91443fca9f44ae2b7d1bee201"
@@ -6778,13 +6782,14 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
-react-test-renderer@16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.2.0.tgz#bddf259a6b8fcd8555f012afc8eacc238872a211"
+react-test-renderer@^16.3.0-alpha.1:
+  version "16.3.0-rc.0"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.0-rc.0.tgz#e5030856d19cef342c65955fc9fba90104bdcc1d"
   dependencies:
     fbjs "^0.8.16"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+    react-is "^16.3.0-rc.0"
 
 react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
