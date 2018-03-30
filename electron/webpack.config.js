@@ -4,7 +4,10 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   entry: {
-    app: path.resolve(__dirname, 'app', 'renderer.js')
+    app: [
+      'babel-regenerator-runtime',
+      path.resolve(__dirname, 'app', 'renderer.js')
+    ]
   },
   node: {
     __filename: true,
