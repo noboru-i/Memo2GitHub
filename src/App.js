@@ -6,10 +6,11 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 import Login from './components/Login';
 
-export default class App extends Component<{}> {
+class HomeScreen extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
@@ -19,6 +20,10 @@ export default class App extends Component<{}> {
     );
   }
 }
+
+export default StackNavigator({
+  Home: { screen: HomeScreen }
+});
 
 const styles = StyleSheet.create({
   container: {
