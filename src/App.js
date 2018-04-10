@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+// @flow
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
@@ -10,7 +6,7 @@ import { StackNavigator } from 'react-navigation';
 
 import Login from './components/Login';
 
-class HomeScreen extends Component<{}> {
+class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -25,7 +21,7 @@ class HomeScreen extends Component<{}> {
   }
 }
 
-class NextScreen extends Component<{}> {
+class NextScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
