@@ -1,24 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+// @flow
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 import Login from './components/Login';
 
-export default class App extends Component<{}> {
+class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Button
+          onPress={() => this.props.navigation.navigate('Next')}
+          title="Go to details"
+        />
         <Login />
       </View>
     );
   }
 }
+
+class NextScreen extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Next Screen!!</Text>
+      </View>
+    );
+  }
+}
+
+export default StackNavigator({
+  Home: { screen: HomeScreen },
+  Next: { screen: NextScreen }
+});
 
 const styles = StyleSheet.create({
   container: {

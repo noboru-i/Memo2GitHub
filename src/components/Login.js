@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -9,7 +11,7 @@ import {
 } from 'react-native';
 import Octokit from '@octokit/rest';
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
