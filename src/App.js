@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { Navigation } from 'react-native-navigation';
 
 import Login from './components/Login';
 
@@ -20,16 +20,30 @@ const styles = StyleSheet.create({
   }
 });
 
-const HomeScreen = props => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>Welcome to React Native!</Text>
-    <Button
-      onPress={() => props.navigation.navigate('Next')} // eslint-disable-line react/prop-types
-      title="Go to details"
-    />
-    <Login />
-  </View>
-);
+class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onPushAnother = this.onPushAnother.bind(this);
+  }
+
+  onPushAnother() {
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.push({
+      screen: 'example.SecondTabScreen',
+      title: 'Pushed Screen'
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Button onPress={this.onPushAnother} title="Go to details" />
+        <Login />
+      </View>
+    );
+  }
+}
 
 const NextScreen = () => (
   <View style={styles.container}>
@@ -37,7 +51,24 @@ const NextScreen = () => (
   </View>
 );
 
-export default StackNavigator({
-  Home: { screen: HomeScreen },
-  Next: { screen: NextScreen }
+function registerScreens() {
+  Navigation.registerComponent('example.FirstTabScreen', () => HomeScreen);
+  Navigation.registerComponent('example.SecondTabScreen', () => NextScreen);
+}
+
+registerScreens();
+
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      label: 'One',
+      screen: 'example.FirstTabScreen', // this is a registered name for a screen
+      title: 'Screen One'
+    },
+    {
+      label: 'Two',
+      screen: 'example.SecondTabScreen',
+      title: 'Screen Two'
+    }
+  ]
 });
