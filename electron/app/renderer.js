@@ -1,10 +1,11 @@
+/* global document */
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 
 const root = document.getElementById('app');
 
 const renderApp = () => {
-  const App = require('../../src/App').default;
+  const App = require('../../src/App').default; // eslint-disable-line global-require
   if (root) render(<App />, root);
 };
 
