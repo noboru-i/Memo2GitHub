@@ -1,4 +1,1 @@
-import { AppRegistry } from 'react-native';
-import App from './src/App';
-
-AppRegistry.registerComponent('Memo2GitHub', () => App);
+import App from './src/App'; // eslint-disable-line no-unused-vars

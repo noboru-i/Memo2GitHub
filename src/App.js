@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StyleSheet, Text, View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 
-import Login from './components/Login';
+import HomeScreen from './screens/HomeScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,24 +20,34 @@ const styles = StyleSheet.create({
   }
 });
 
-const HomeScreen = props => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>Welcome to React Native!</Text>
-    <Button
-      onPress={() => props.navigation.navigate('Next')} // eslint-disable-line react/prop-types
-      title="Go to details"
-    />
-    <Login />
-  </View>
-);
-
 const NextScreen = () => (
   <View style={styles.container}>
     <Text style={styles.welcome}>Next Screen!!</Text>
   </View>
 );
 
-export default StackNavigator({
-  Home: { screen: HomeScreen },
-  Next: { screen: NextScreen }
+function registerScreens() {
+  Navigation.registerComponent('example.FirstTabScreen', () => HomeScreen);
+  Navigation.registerComponent('example.SecondTabScreen', () => NextScreen);
+}
+
+registerScreens();
+
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      label: 'One',
+      screen: 'example.FirstTabScreen', // this is a registered name for a screen
+      icon: require('../img/one.png'),
+      selectedIcon: require('../img/one_selected.png'), // iOS only
+      title: 'Screen One'
+    },
+    {
+      label: 'Two',
+      screen: 'example.SecondTabScreen',
+      icon: require('../img/two.png'),
+      selectedIcon: require('../img/two_selected.png'), // iOS only
+      title: 'Screen Two'
+    }
+  ]
 });
