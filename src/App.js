@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
-import Login from './components/Login';
+import HomeScreen from './screens/HomeScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,31 +19,6 @@ const styles = StyleSheet.create({
     margin: 10
   }
 });
-
-class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onPushAnother = this.onPushAnother.bind(this);
-  }
-
-  onPushAnother() {
-    // eslint-disable-next-line react/prop-types
-    this.props.navigator.push({
-      screen: 'example.SecondTabScreen',
-      title: 'Pushed Screen'
-    });
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Button onPress={this.onPushAnother} title="Go to details" />
-        <Login />
-      </View>
-    );
-  }
-}
 
 const NextScreen = () => (
   <View style={styles.container}>

@@ -3,8 +3,8 @@ import 'react-native';
 import React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 
-import App from '../src/App';
+import HomeScreen from '../src/screens/HomeScreen';
 
 it('renders correctly', () => {
-  const tree = ReactTestRenderer.create(<App />); // eslint-disable-line no-unused-vars
+  const tree = ReactTestRenderer.create(<HomeScreen />); // eslint-disable-line no-unused-vars
 });
