@@ -16,7 +16,7 @@
     "@octokit/rest": "^15.2.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-native": "0.54.2",
+    "react-native": "0.55.2",
     "react-native-electron": "^0.4.2",
     "react-native-navigation": "^1.1.438",
     "react-native-web": "0.5.3"
@@ -42,7 +42,7 @@
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1",
-    "webpack-serve": "^0.2.0"
+    "webpack-serve": "^0.3.0"
   },
   "jest": {
     "preset": "react-native"
