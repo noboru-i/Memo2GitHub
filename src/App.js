@@ -1,41 +1,20 @@
 // @flow
 
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 import HomeScreen from './screens/HomeScreen';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  }
-});
-
-const NextScreen = () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>Next Screen!!</Text>
-  </View>
-);
+import AuthScreen from './screens/AuthScreen';
 
 function registerScreens() {
-  Navigation.registerComponent('example.FirstTabScreen', () => HomeScreen);
-  Navigation.registerComponent('example.SecondTabScreen', () => NextScreen);
+  Navigation.registerComponent('m2g.HomeScreen', () => HomeScreen);
+  Navigation.registerComponent('m2g.AuthScreen', () => AuthScreen);
 }
 
 registerScreens();
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'example.FirstTabScreen',
+    screen: 'm2g.HomeScreen',
     title: 'Welcome'
   }
 });

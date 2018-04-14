@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-import Login from '../components/Login';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -17,7 +15,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class HomeScreen extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
     this.onPushAnother = this.onPushAnother.bind(this);
@@ -26,7 +24,7 @@ export default class HomeScreen extends React.Component {
   onPushAnother() {
     // eslint-disable-next-line react/prop-types
     this.props.navigator.push({
-      screen: 'example.SecondTabScreen',
+      screen: 'm2g.AuthScreen',
       title: 'Pushed Screen'
     });
   }
@@ -36,7 +34,6 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Button onPress={this.onPushAnother} title="Go to details" />
-        <Login />
       </View>
     );
   }
