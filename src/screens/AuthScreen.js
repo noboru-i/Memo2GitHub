@@ -48,9 +48,8 @@ export default class extends React.Component {
         AsyncStorage.setItem('auth.token', this.state.token);
       })
       .catch(error => {
-        if (error.code === 401) {
-          alert('Failed to Authenticate. Please recheck user id and token.'); // eslint-disable-line no-undef,no-alert
-        }
+        console.log(error);
+        alert('Failed to Authenticate. Please recheck token.'); // eslint-disable-line no-undef,no-alert
       });
   }
 
