@@ -6,5 +6,9 @@ import ReactTestRenderer from 'react-test-renderer';
 import HomeScreen from '../src/screens/HomeScreen';
 
 it('renders correctly', () => {
-  const tree = ReactTestRenderer.create(<HomeScreen />); // eslint-disable-line no-unused-vars
+  const mockNavigator = { setTitle: () => {} };
+  // eslint-disable-next-line no-unused-vars
+  const tree = ReactTestRenderer.create(
+    <HomeScreen navigator={mockNavigator} />
+  );
 });
