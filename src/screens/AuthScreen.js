@@ -1,22 +1,17 @@
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import {
-  StyleSheet,
-  View,
-  TextInput,
+  Container,
+  Content,
   Button,
-  AsyncStorage
-} from 'react-native';
+  Text,
+  Form,
+  Item,
+  Input,
+  Label
+} from 'native-base';
 
 import GitHubApi from '@octokit/rest';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  }
-});
 
 export default class extends React.Component {
   constructor(props) {
@@ -33,6 +28,9 @@ export default class extends React.Component {
         this.setState({ token: data });
       }
     });
+
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.setTitle({ title: 'Auth Setting' });
   }
 
   onPressCheck() {
@@ -55,18 +53,27 @@ export default class extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          placeholder="token"
-          onChangeText={text => this.setState({ token: text })}
-          value={this.state.token}
-        />
-        <Button
-          onPress={this.onPressCheck}
-          title="Check"
-          disabled={!this.state.token}
-        />
-      </View>
+      <Container>
+        <Content>
+          <Form>
+            <Item stackedLabel last>
+              <Label>token</Label>
+              <Input
+                onChangeText={text => this.setState({ token: text })}
+                value={this.state.token}
+              />
+            </Item>
+          </Form>
+          <Button
+            block
+            style={{ margin: 10, marginTop: 30 }}
+            onPress={this.onPressCheck}
+            disabled={!this.state.token}
+          >
+            <Text>Go to auth</Text>
+          </Button>
+        </Content>
+      </Container>
     );
   }
 }

@@ -7,11 +7,15 @@ export default class extends React.Component {
     this.onPushAnother = this.onPushAnother.bind(this);
   }
 
+  componentWillMount() {
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.setTitle({ title: 'Memo to GitHub' });
+  }
+
   onPushAnother() {
     // eslint-disable-next-line react/prop-types
     this.props.navigator.push({
-      screen: 'm2g.AuthScreen',
-      title: 'Pushed Screen'
+      screen: 'm2g.AuthScreen'
     });
   }
 
@@ -19,8 +23,7 @@ export default class extends React.Component {
     return (
       <Container>
         <Content>
-          <Text>This is Content Section</Text>
-          <Button onPress={this.onPushAnother}>
+          <Button block onPress={this.onPushAnother}>
             <Text>Go to auth</Text>
           </Button>
         </Content>
