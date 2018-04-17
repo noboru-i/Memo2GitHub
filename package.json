@@ -13,7 +13,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@octokit/rest": "^15.2.5",
+    "@octokit/rest": "noboru-i/rest.js#fix-for-react-native",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-native": "0.55.2",
