@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@octokit/rest": "noboru-i/rest.js#fix-for-react-native",
+    "native-base": "^2.4.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-native": "0.55.2",
