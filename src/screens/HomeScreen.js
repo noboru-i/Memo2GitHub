@@ -1,6 +1,6 @@
 import React from 'react';
 import { AsyncStorage, FlatList, TouchableHighlight, View } from 'react-native';
-import { Container, Content, Button, Text } from 'native-base';
+import { Container, Content, Button, Text, Fab, Icon } from 'native-base';
 import GitHubApi from '@octokit/rest';
 
 export default class extends React.Component {
@@ -12,6 +12,7 @@ export default class extends React.Component {
 
     this.onPushSetting = this.onPushSetting.bind(this);
     this.onPressIssue = this.onPressIssue.bind(this);
+    this.onPressNew = this.onPressNew.bind(this);
   }
 
   componentWillMount() {
@@ -29,8 +30,15 @@ export default class extends React.Component {
   }
 
   onPressIssue(issue) {
+    // TODO
     console.log(this);
     alert(`Pressed ${issue.title}`); // eslint-disable-line no-undef,no-alert
+  }
+
+  onPressNew() {
+    // TODO
+    console.log(this);
+    alert(`Pressed new!`); // eslint-disable-line no-undef,no-alert
   }
 
   async fetchIssues() {
@@ -89,6 +97,13 @@ export default class extends React.Component {
             )}
           />
         </Content>
+        <Fab
+          style={{ backgroundColor: '#2196F3' }}
+          position="bottomRight"
+          onPress={this.onPressNew}
+        >
+          <Icon name="add" />
+        </Fab>
       </Container>
     );
   }
