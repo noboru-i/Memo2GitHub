@@ -15,7 +15,7 @@ export default class extends React.Component {
   onPushAnother() {
     // eslint-disable-next-line react/prop-types
     this.props.navigator.push({
-      screen: 'm2g.AuthScreen'
+      screen: 'm2g.SettingScreen'
     });
   }
 
