@@ -1,40 +1,110 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  }
-});
+import { AsyncStorage, FlatList, TouchableHighlight, View } from 'react-native';
+import { Container, Content, Button, Text, Fab, Icon } from 'native-base';
+import GitHubApi from '@octokit/rest';
 
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    this.onPushAnother = this.onPushAnother.bind(this);
+    this.state = {
+      issues: []
+    };
+
+    this.onPushSetting = this.onPushSetting.bind(this);
+    this.onPressIssue = this.onPressIssue.bind(this);
+    this.onPressNew = this.onPressNew.bind(this);
   }
 
-  onPushAnother() {
+  componentWillMount() {
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.setTitle({ title: 'Memo to GitHub' });
+
+    this.fetchIssues();
+  }
+
+  onPushSetting() {
     // eslint-disable-next-line react/prop-types
     this.props.navigator.push({
-      screen: 'm2g.AuthScreen',
-      title: 'Pushed Screen'
+      screen: 'm2g.SettingScreen'
     });
+  }
+
+  onPressIssue(issue) {
+    // TODO
+    console.log(this);
+    alert(`Pressed ${issue.title}`); // eslint-disable-line no-undef,no-alert
+  }
+
+  onPressNew() {
+    // TODO
+    console.log(this);
+    alert(`Pressed new!`); // eslint-disable-line no-undef,no-alert
+  }
+
+  async fetchIssues() {
+    const token = await AsyncStorage.getItem('auth.token');
+    const owner = await AsyncStorage.getItem('setting.owner');
+    const repo = await AsyncStorage.getItem('setting.repository');
+    if (!owner || !repo) {
+      return;
+    }
+
+    const octokit = new GitHubApi({});
+    octokit.authenticate({
+      type: 'token',
+      token
+    });
+    octokit.issues
+      .getForRepo({ owner, repo })
+      .then(({ data }) => {
+        this.setState({ issues: data });
+      })
+      .catch(error => {
+        console.log(error);
+        alert('Failed to get issues. Please check network.'); // eslint-disable-line no-undef,no-alert
+      });
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Button onPress={this.onPushAnother} title="Go to details" />
-      </View>
+      <Container>
+        <Content>
+          <Button block onPress={this.onPushSetting}>
+            <Text>Setting</Text>
+          </Button>
+          <FlatList
+            data={this.state.issues}
+            renderItem={({ item, separators }) => (
+              <TouchableHighlight
+                onPress={() => this.onPressIssue(item)}
+                onShowUnderlay={separators.highlight}
+                onHideUnderlay={separators.unhighlight}
+              >
+                <View style={{ backgroundColor: 'white', padding: 10 }}>
+                  <Text>{item.title}</Text>
+                </View>
+              </TouchableHighlight>
+            )}
+            keyExtractor={item => item.number.toString()}
+            ItemSeparatorComponent={() => (
+              <View
+                style={{
+                  height: 1,
+                  width: '100%',
+                  backgroundColor: '#E0E0E0'
+                }}
+              />
+            )}
+          />
+        </Content>
+        <Fab
+          style={{ backgroundColor: '#2196F3' }}
+          position="bottomRight"
+          onPress={this.onPressNew}
+        >
+          <Icon name="add" />
+        </Fab>
+      </Container>
     );
   }
 }
