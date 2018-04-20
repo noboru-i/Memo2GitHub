@@ -5,6 +5,7 @@ import { Navigation } from 'react-native-navigation';
 import { StyleProvider, Root, getTheme } from 'native-base';
 
 import HomeScreen from './screens/HomeScreen';
+import NewScreen from './screens/NewScreen';
 import SettingScreen from './screens/SettingScreen';
 
 function wrap(WrappedComponent) {
@@ -19,6 +20,7 @@ function wrap(WrappedComponent) {
 
 function registerScreens() {
   Navigation.registerComponent('m2g.HomeScreen', () => wrap(HomeScreen));
+  Navigation.registerComponent('m2g.NewScreen', () => wrap(NewScreen));
   Navigation.registerComponent('m2g.SettingScreen', () => wrap(SettingScreen));
 }
 
