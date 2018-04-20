@@ -36,7 +36,8 @@ export default class extends React.Component {
   }
 
   onPressNew() {
-    this.props.navigator.push({
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.showModal({
       screen: 'm2g.NewScreen'
     });
   }

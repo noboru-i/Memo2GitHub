@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import GitHubApi from '@octokit/rest';
 
-export default class extends React.Component {
+export default class NewScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,12 +20,27 @@ export default class extends React.Component {
       body: ''
     };
 
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.onCreateButton = this.onCreateButton.bind(this);
   }
 
   componentWillMount() {
     // eslint-disable-next-line react/prop-types
     this.props.navigator.setTitle({ title: 'Create new issue' });
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.setButtons({
+      leftButtons: [{ title: 'close', id: 'close' }]
+    });
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type === 'NavBarButtonPress') {
+      if (event.id === 'close') {
+        // eslint-disable-next-line react/prop-types
+        this.props.navigator.dismissModal();
+      }
+    }
   }
 
   async onCreateButton() {
