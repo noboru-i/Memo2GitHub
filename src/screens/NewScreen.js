@@ -1,3 +1,5 @@
+/* global fetch */
+
 import React from 'react';
 import { AsyncStorage, Alert } from 'react-native';
 import {
@@ -8,14 +10,18 @@ import {
   Form,
   Item,
   Input,
-  Label
+  Label,
+  Icon
 } from 'native-base';
 import GitHubApi from '@octokit/rest';
+
+import HTMLParser from 'fast-html-parser';
 
 export default class NewScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      url: '',
       title: '',
       body: ''
     };
@@ -23,6 +29,7 @@ export default class NewScreen extends React.Component {
     // eslint-disable-next-line react/prop-types
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.onCreateButton = this.onCreateButton.bind(this);
+    this.onPressGlobe = this.onPressGlobe.bind(this);
   }
 
   componentWillMount() {
@@ -78,24 +85,59 @@ export default class NewScreen extends React.Component {
       });
   }
 
+  async onPressGlobe() {
+    try {
+      console.log('onPressGlobe');
+      const response = await fetch(this.state.url, {
+        redirect: 'follow'
+      });
+      const text = await response.text();
+      if (!text) {
+        console.log('cannot get text');
+        return;
+      }
+
+      const dom = new HTMLParser.parse(text);
+      const titleDom = dom.querySelector('head title');
+      const title = titleDom.text;
+      const body = `## URL
+${title}
+
+## Content
+`;
+      this.setState({ title, body });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
     return (
       <Container>
         <Content>
           <Form>
-            <Item stackedLabel>
+            <Item inlineLabel>
+              <Label>url</Label>
+              <Input
+                onChangeText={text => this.setState({ url: text })}
+                value={this.state.url}
+              />
+              <Icon active name="globe" onPress={this.onPressGlobe} />
+            </Item>
+            <Item inlineLabel>
               <Label>title</Label>
               <Input
                 onChangeText={text => this.setState({ title: text })}
                 value={this.state.title}
               />
             </Item>
-            <Item stackedLabel style={{ height: 200 }}>
+            <Item inlineLabel style={{ height: 200 }}>
               <Label>body</Label>
               <Input
                 multiline
                 onChangeText={text => this.setState({ body: text })}
                 value={this.state.body}
+                style={{ height: 200 }}
               />
             </Item>
           </Form>
