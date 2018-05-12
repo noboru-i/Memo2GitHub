@@ -98,13 +98,27 @@ android {
     buildToolsVersion "25.0.1"
 
     defaultConfig {
-        applicationId "com.memo2github"
+        applicationId "hm.orz.chaos114.android.memo2github"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("cert/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        release {
+            storeFile file("cert/release.keystore")
+            storePassword System.getenv("STORE_PASSWORD")
+            keyAlias "chaos114"
+            keyPassword System.getenv("KEY_PASSWORD")
         }
     }
     splits {
@@ -116,9 +130,17 @@ android {
         }
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+            applicationIdSuffix '.debug'
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
