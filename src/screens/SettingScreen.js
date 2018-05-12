@@ -82,9 +82,9 @@ export default class extends React.Component {
           return;
         }
 
-        alert(`has issue`); // eslint-disable-line no-undef,no-alert
         AsyncStorage.setItem('setting.owner', this.state.owner);
         AsyncStorage.setItem('setting.repository', this.state.repository);
+        alert(`Applied!`); // eslint-disable-line no-undef,no-alert
       })
       .catch(error => {
         console.log(error);

@@ -36,9 +36,10 @@ export default class extends React.Component {
   }
 
   onPressNew() {
-    // TODO
-    console.log(this);
-    alert(`Pressed new!`); // eslint-disable-line no-undef,no-alert
+    // eslint-disable-next-line react/prop-types
+    this.props.navigator.showModal({
+      screen: 'm2g.NewScreen'
+    });
   }
 
   async fetchIssues() {
