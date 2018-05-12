@@ -97,7 +97,7 @@ export default class NewScreen extends React.Component {
         return;
       }
 
-      const dom = new HTMLParser.parse(text);
+      const dom = new HTMLParser.parse(text); // eslint-disable-line new-cap
       const titleDom = dom.querySelector('head title');
       const title = titleDom.text;
       const body = `## URL
