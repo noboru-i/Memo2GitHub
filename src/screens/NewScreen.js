@@ -114,7 +114,7 @@ ${title}
   render() {
     return (
       <Container>
-        <Content>
+        <Content style={{ backgroundColor: '#fff' }}>
           <Form>
             <Item inlineLabel>
               <Label>url</Label>

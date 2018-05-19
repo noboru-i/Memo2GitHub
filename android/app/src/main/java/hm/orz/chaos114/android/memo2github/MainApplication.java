@@ -1,4 +1,4 @@
-package com.memo2github;
+package hm.orz.chaos114.android.memo2github;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -8,6 +8,8 @@ import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
 import java.util.List;
+
+import hm.orz.chaos114.android.memo2github.BuildConfig;
 
 public class MainApplication extends NavigationApplication {
 
